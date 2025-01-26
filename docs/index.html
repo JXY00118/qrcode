@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BLE设备控制界面</title>
+    <script>
+        function sendCommand(command) {
+            // 这里可以添加发送指令到BLE设备的代码
+            // 例如，使用Web Bluetooth API或发送到服务器
+            console.log("发送指令: " + command);
+        }
+    </script>
+</head>
+<body>
+    <h1>BLE设备控制界面</h1>
+    <button onclick="sendCommand('motor_half_turn')">马达半转</button>
+</body>
+</html>
