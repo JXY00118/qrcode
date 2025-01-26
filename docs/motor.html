@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BLE设备控制界面</title>
+    <script>
+        async function sendCommand(command) {
+            try {
+                const device = await navigator.bluetooth.requestDevice({
+                    filters: [{ services: ['12345678-1234-1234-1234-123456789abc'] }]
+                });
+                const server = await device.gatt.connect();
+                const service = await server.getPrimaryService('12345678-1234-1234-1234-123456789abc');
+                const characteristic = await service.getCharacteristic('83de9fd2-8637-5e00-82b9-09c7cb96393b');
+                await characteristic.writeValue(new TextEncoder().encode(command));
+                console.log("发送指令: " + command);
+            } catch (error) {
+                console.error('Argh!', error);
+            }
+        }
+    </script>
+</head>
+<body>
+    <h1>BLE设备控制界面</h1>
+    <button onclick="sendCommand('motor_half_turn')">马达半转</button>
+</body>
+</html>
